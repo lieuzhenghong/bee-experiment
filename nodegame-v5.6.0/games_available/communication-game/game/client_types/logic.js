@@ -43,9 +43,17 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 		cb: function() {
 			console.log('Send');
 			node.on.data('sending_msg', function(msg) {
+				// Everything looks good here...
 				console.log("message received!");
-				console.log(msg.data);
+				console.log(msg)
+				console.log(msg.from)
+				// [BUG] [TODO]
+				// The following line throws an error:
+				// ServerNode caught an exception:
+				// TypeError: Matcher.normalizeRound: no matches found
+				// But it can get the correct ID in msg.from...
 				other_player = node.game.matcher.getMatchFor(msg.from);
+				console.log(`The other player is: ${other_player}`);
 				message_choices = msg.data.message_choices;
 				//node.say('message', node.game.memory.player, 'Hello');
 			});
@@ -82,7 +90,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     msg.data.originalOffer = offer;
                 }
 
+
+				// And it also works here, so why doesn't it work in the 'send' step?
+				console.log(msg)
+				console.log(msg.from);
                 observer = node.game.matcher.getMatchFor(msg.from);
+				console.log(`The other player is: ${observer}`);
                 // Send the decision to the other player.
                 node.say('decision', observer, msg.data.offer);
 

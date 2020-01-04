@@ -1,1 +1,0 @@
-{"name":"communication-game","level":"error","message":"SocketManager.send2client: Msg not sent. Could not find socket for recipient: bot (last resolved as: null)","timestamp":"2020-01-03T09:55:05.277Z"}

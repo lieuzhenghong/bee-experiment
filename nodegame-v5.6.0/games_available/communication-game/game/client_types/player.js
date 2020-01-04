@@ -68,10 +68,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
 	stager.extendStep('receive', {
 		cb: function() {
-			// Need to get the 
-			//console.log(message_choice.getValues());
-			// How to receive GameMsg?
-			//node.on.data('' () => {} ) ...
 			node.on.data('message', function(msg) {
 				console.log("message received!");
 				console.log(msg);
