@@ -1,0 +1,3 @@
+# bin/ 
+
+Here you can add scripts that are not directly related to the execution in the nodeGame environment.

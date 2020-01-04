@@ -1,0 +1,93 @@
+# nodeGame Changelog
+
+# 5.6.0
+- New release, updated installer.
+
+# 5.4.0
+- New release, updated server, widgets, window.
+
+# 5.3.1
+- Minor fixes to installer.
+
+# 5.3.0
+- Improved servernode.js conf file.
+- Improved installer: --dry option.
+- Improved installer: better handling of parent node_modules folders.
+
+# 5.1.0
+- Minor update to installer.
+- Widgets: CustomInput, and garbage collection.
+- Window and Client: check frame height automatically.
+
+# 5.0.1
+- Minor update to installer.
+- Fixed VisualTimer.restart bug introduced in v5.
+- Server does not scan hidden folders inside the games directory.
+- Generator does not allow to create games starting with a dot.
+
+# 5.0.0
+- Updated installer, now installing latest versions of v3, v4, v5.
+- Updated installer, checks for node_modules folder above the current folder.
+- Updated package.json with stricter version numbers.
+
+# 4.3.3
+- Updated package.json to fix the version numbers of v4
+
+# 4.3.2
+- Re-enabled support for games without treatment description (bug introduced
+in 4.3.0)
+- Installer checks better for -v and -h options.
+
+# 4.3.0
+- Treatment selection in waiting room. If ALLOW_SELECT_TREATMENT is true in
+waitroom.settings.js then a small dropdown menu allows user to select the
+treatment for the game.
+- Small fixes.
+
+# 4.2.1 (current, not npm)
+- Fixed building client.
+
+# 4.2.0
+- Improved create-game command.
+- Cleanup
+- Small fixes.
+
+# 4.1.5
+- Fixed installer on Node < 8.x
+
+# 4.1.3
+- Improved installer
+- Msg anti-spoofing support
+- Fixed bug on Chrome with flickering scrollbar
+- More options on Monitor, including display of last error
+- Improved nodegame-mturk support
+- Fixed tests
+- Smaller fixes
+
+# 4.0.4
+- Improved monitor error logging.
+- Updated installer version.
+
+# 4.0.2
+- Big release, check CHANGELOG on website.
+
+# 3.5
+- Printing version on startup (launcher).
+
+# 3.2
+- Updated client and server.
+- Updated install script.
+
+# 3.0.0
+- 02/10/2016 NodeGame Version Upgrade.
+
+# 2.1.0
+- Fixed launcher.
+
+# 2.0.2
+- Fixed install.stable script.
+- Fixing launcher options. 
+
+# 2.0.0 (current)
+- Added -s option to launcher. Starts the server in SSL mode. Can be empty (loads nodegame-server/ssl/), or a path to a SSL directory.
+- Added -b option to launcher. Builds specified components before starting the server. Available options: JSUS, window, widgets, client, all.

@@ -1,0 +1,8 @@
+{
+    "name": "communication-game",
+    "version": "0.0.1",
+    "description": "Effect of prosocial message framing on cooperation in the one-shot Stag Hunt",
+    "author": "Zhenghong Lieu <lieuzhenghong@gmail.com>",
+    "license": "MIT/X11",
+    "homepage": "http://nodegame.org"
+}

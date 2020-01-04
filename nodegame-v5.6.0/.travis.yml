@@ -1,0 +1,26 @@
+sudo: false
+language: node_js
+node_js:
+  - 6
+  - 7
+  - 8
+  - 10
+
+before_install:
+# Get installer script.
+  - wget https://raw.githubusercontent.com/nodeGame/nodegame/master/bin/nodegame-installer.js
+  - chmod a+x nodegame-installer.js
+
+install:
+  ## Remove package json, otherwise npm does not install nodegame as dependency.
+  - npm install --only=dev
+  - rm package.json
+  # --branch v4
+  - node nodegame-installer.js @dev --install-dir node_modules --no-spinner --yes
+
+script:
+# Add extra tests here.
+
+# Test Ultimatum game.
+  - cd node_modules/nodegame/games/ultimatum-game
+  - ./bin/run-standalone-test-v4.sh

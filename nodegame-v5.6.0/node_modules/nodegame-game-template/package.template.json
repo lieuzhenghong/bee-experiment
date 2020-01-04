@@ -1,0 +1,8 @@
+{
+    "name": "{NAME}",
+    "version": "0.0.1",
+    "description": "This is a nodeGame game",
+    "author": "{AUTHOR} <{EMAIL}>",
+    "license": "MIT/X11",
+    "homepage": "http://nodegame.org"
+}

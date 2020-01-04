@@ -1,0 +1,17 @@
+_*
+*~
+.project
+.settings
+node_modules/
+npm-debug.log
+.DS_Store
+
+\#*
+.\#*
+
+*.swp
+
+log
+docs/
+
+*.geany

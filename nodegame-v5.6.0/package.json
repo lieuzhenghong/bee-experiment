@@ -1,0 +1,114 @@
+{
+  "_args": [
+    [
+      "nodegame@5.6.0",
+      "/home/lieu/dev/bee_game"
+    ]
+  ],
+  "_from": "nodegame@5.6.0",
+  "_hasShrinkwrap": false,
+  "_id": "nodegame@5.6.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/nodegame",
+  "_nodeVersion": "10.16.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/nodegame_5.6.0_1576365651293_0.4462436544138424"
+  },
+  "_npmUser": {
+    "email": "futur.dorko@gmail.com",
+    "name": "shakty"
+  },
+  "_npmVersion": "6.9.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "nodegame",
+    "raw": "nodegame@5.6.0",
+    "rawSpec": "5.6.0",
+    "scope": null,
+    "spec": "5.6.0",
+    "type": "version"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/nodegame/-/nodegame-5.6.0.tgz",
+  "_shasum": "01141f69145eb33f71f2d6865457bfcbdef4b698",
+  "_shrinkwrap": null,
+  "_spec": "nodegame@5.6.0",
+  "_where": "/home/lieu/dev/bee_game",
+  "author": {
+    "email": "futur.dorko@gmail.com",
+    "name": "Stefano Balietti"
+  },
+  "bugs": {
+    "url": "https://github.com/nodeGame/nodegame/issues"
+  },
+  "contributors": [
+    {
+      "name": "Stefano Balietti",
+      "email": "futur.dorko@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "JSUS": ">= 1.1.0",
+    "NDDB": ">= 1.18.1",
+    "commander": "*",
+    "fs-extra": "*",
+    "nodegame-client": "^5.0.0",
+    "nodegame-db": "*",
+    "nodegame-game-template": "^5.0.0",
+    "nodegame-generator": "^5.0.0",
+    "nodegame-mongodb": "*",
+    "nodegame-monitor": "^5.0.0",
+    "nodegame-mturk": "^5.0.0",
+    "nodegame-requirements": "^5.0.0",
+    "nodegame-server": "^5.0.0",
+    "nodegame-widgets": "^5.0.0",
+    "nodegame-window": "^5.0.0",
+    "smoosh": "0.4.0",
+    "ultimatum-game": "^5.0.0"
+  },
+  "description": "Fast, scalable JavaScript for large-scale, online, multiplayer, real-time games and experiments.",
+  "devDependencies": {
+    "mocha": ">= 0.3.0",
+    "should": "4.4.1"
+  },
+  "directories": {},
+  "dist": {
+    "fileCount": 28,
+    "integrity": "sha512-+EaFTtRHPsT2+ho46RARIpLmhr33yLl5NIV9NYxHxH+NvzvqUkf7dbwzDvGNddL2L6rmpdNx8E0mOv5Yd2uzPw==",
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJd9W5TCRA9TVsSAnZWagAAC+MP/3ORjRPuweU1QKRH1IUA\nqJ1nljp9Z7fQIywBAhHYw/MEnAOshMYnlzH7NCjzUaNQAYyGqM4+7gnr5Knd\nIeVBbMCg07gYF63s4AKaLiHXMXG4k6VFjOIs6Yb9wIwdNEBJr3ciUjKW+VBk\nz5807MhJcngKslJsuRYaBYj2pyv+k0Y+4KwDewD1g3cSHP6mpgXd7WmlGN96\nr9SgFGHCnLNd1pMArNeTsG2eajEDh4vTXRcNvwltXtQ2BiClORm4E5n0VbBI\nycK0DPoS3QvUgOxkXsECiVSBv/hPu8y3SBjzOf02EUb9HT+kmkMnPmavnNDi\nv7pZaJ10bKmKARamYHmGE9z2Dd+9Xq6/NjkrMPNA+KzmOx9n43BH6caGLXq1\nXsYv1YdOVZOxit9UiC0DmST4UWKpBpC7NeQO1Z1QHTgzoHDlZeobI10wjV0m\nvpT0YxQ/KGurz6bEWoZ26zI8S3KxgwDw+b9azcVLkh44Z7CvhhRhv0Ub+5TP\npTZojN0n/yFeZZ4XMrjrzaYwbD3kvlwmZJni/WI99DImztqF48q+90hzABer\nSGSVox9jgjhVVKE/hQIpmQOpKGFuCqntDG03T+ZCY5hZmbIhHAWdliFVBs16\njL82Y19g4bvPhRDOOzFqsz4tqufrxyM3lygNv/sWadQw66VVNk5FMk2i+vwG\nppa/\r\n=VkvH\r\n-----END PGP SIGNATURE-----\r\n",
+    "shasum": "01141f69145eb33f71f2d6865457bfcbdef4b698",
+    "tarball": "https://registry.npmjs.org/nodegame/-/nodegame-5.6.0.tgz",
+    "unpackedSize": 100155
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "gitHead": "12c8b130a3d7491431d2492e09613b9838f378f2",
+  "homepage": "http://nodegame.org",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "philippkueng",
+      "email": "git@philippkueng.ch"
+    },
+    {
+      "name": "shakty",
+      "email": "futur.dorko@gmail.com"
+    }
+  ],
+  "name": "nodegame",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodeGame/nodegame.git"
+  },
+  "scripts": {
+    "start": "node launcher.js"
+  },
+  "version": "5.6.0"
+}
