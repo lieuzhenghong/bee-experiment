@@ -36,25 +36,29 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
-	var other_player;
-	var message_choices;
+	var staged_messages = [];
+
 
 	stager.extendStep('send', {
+		matcher: {
+			match: 'roundrobin'
+		},
 		cb: function() {
 			console.log('Send');
 			node.on.data('sending_msg', function(msg) {
 				// Everything looks good here...
 				console.log("message received!");
 				console.log(msg)
-				console.log(msg.from)
-				// [BUG] [TODO]
-				// The following line throws an error:
-				// ServerNode caught an exception:
-				// TypeError: Matcher.normalizeRound: no matches found
-				// But it can get the correct ID in msg.from...
-				other_player = node.game.matcher.getMatchFor(msg.from);
+				let other_player = node.game.matcher.getMatchFor(msg.from);
+				let message_choices = msg.data.message_choices;
 				console.log(`The other player is: ${other_player}`);
-				message_choices = msg.data.message_choices;
+
+				staged_messages.push({
+					player_id: msg.from,
+					other_player: other_player,
+					message_choices: Object.values(message_choices) // convert to array
+				});
+
 				//node.say('message', node.game.memory.player, 'Hello');
 			});
 		}
@@ -63,10 +67,34 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('receive', {
         cb: function() {
             console.log('Receive');
-			node.say('message_received', other_player, message_choices);
+			console.log('Sending message');
+
+			function convert_to_string(choice_array) {
+
+				function reducer(acc, choice) {
+					if (choice.value === 'Do not send this part of the message') {}
+					else { acc += choice.value; }
+					return acc;
+				}
+
+				const message_string = choice_array.reduce(reducer, '');
+				return message_string;
+			}
+
+			staged_messages.forEach((msg_obj) => {
+				console.log(msg_obj);
+				var message_string = convert_to_string(msg_obj.message_choices);
+				console.log('Message string: ' + message_string);
+				node.say('message_received', msg_obj.other_player, message_string);
+			})
         }
     });
 
+	stager.extendStep('game', {
+
+	});
+
+	/*
     stager.extendStep('game', {
         matcher: {
             roles: [ 'DICTATOR', 'OBSERVER' ],
@@ -102,6 +130,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             console.log('Game round: ' + node.player.stage.round);
         }
     });
+	*/
 
     stager.extendStep('end', {
         cb: function() {

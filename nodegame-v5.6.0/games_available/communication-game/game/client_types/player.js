@@ -68,7 +68,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
 	stager.extendStep('receive', {
 		cb: function() {
-			node.on.data('message', function(msg) {
+			node.on.data('message_received', function(msg) {
 				console.log("message received!");
 				console.log(msg);
 			});

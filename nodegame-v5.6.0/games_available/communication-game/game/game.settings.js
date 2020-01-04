@@ -16,53 +16,53 @@
  */
 	intent_choicetable=	{
 		name: 'ChoiceTable',
-		id: 'communication_choices',
+		id: 'choice_1',
 		orientation: 'V',
 		mainText: "Please choose a message to send to the other player:",
 		choices: [
-			['A', 'I intend to choose A'],
-			['B', 'I intend to choose B'],
-			['N', 'Do not send this part of the message']
+			'I intend to choose A',
+			'I intend to choose B',
+			['', 'Do not send this part of the message']
 		],
 		requiredChoice: true
 	}
 
 	imperative_choicetable= {
 		name: 'ChoiceTable',
-		id: 'communication_choices_2',
+		id: 'choice_2',
 		orientation: 'V',
 		mainText: 'Please choose an additional message to send to the other player',
 		choices: [
-			['other_A', 'You should choose A'],
-			['other_B', 'You should choose B'],
-			['N', 'Do not send this part of the message']
+			'You should choose A',
+			'You should choose B',
+			['', 'Do not send this part of the message']
 		],
 		requiredChoice: true
 	}
 
 	shared_knowledge_choicetable= {
 		name: 'ChoiceTable',
-		id: 'communication_choices_3',
+		id: 'choice_3',
 		orientation: 'V',
 		mainText: 'Please choose an additional message to send to the other player',
 		choices: [
-			['shared_knowledge', `Option A is the better choice if both players
-				choose option A as both players get the highest payoff. Option
-				B is the better choice if the other player plays option B`],
-			['N', 'Do not send this part of the message']
+			'Option A is the better choice if both players ' +
+			'choose option A as both players get the highest payoff. ' +
+			'Option B is the better choice if the other player plays option B',
+			['', 'Do not send this part of the message']
 		],
 		requiredChoice: true
 	}
 
 	prosocial_choicetable= {
 		name: 'ChoiceTable',
-		id: 'communication_choices_prosocial',
+		id: 'choice_4',
 		orientation: 'V',
 		mainText: 'Please choose an additional message to send to the other player',
 		choices: [
-			['A_prosocial', 'I care about both of our payoffs'],
-			['B_prosocial', 'I care only about my own payoff'],
-			['N', 'Do not send this part of the message']
+			'I care about both of our payoffs',
+			'I care only about my own payoff',
+			['', 'Do not send this part of the message']
 		],
 		requiredChoice: true
 	}

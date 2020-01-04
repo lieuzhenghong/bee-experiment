@@ -16,7 +16,8 @@ module.exports = function(stager, settings) {
         .next('communicate')
 		.step('send')
 		.step('receive')
-        .repeat('game', settings.REPEAT)
+		.next('game')
+        //.repeat('game', settings.REPEAT)
         .next('end')
         .gameover();
 
