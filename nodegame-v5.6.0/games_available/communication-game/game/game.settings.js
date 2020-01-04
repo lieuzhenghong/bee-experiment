@@ -31,7 +31,7 @@
 		name: 'ChoiceTable',
 		id: 'communication_choices_2',
 		orientation: 'V',
-		mainText: 'Please choose an optional message to send to the other player',
+		mainText: 'Please choose an additional message to send to the other player',
 		choices: [
 			['other_A', 'You should choose A'],
 			['other_B', 'You should choose B'],
@@ -44,11 +44,11 @@
 		name: 'ChoiceTable',
 		id: 'communication_choices_3',
 		orientation: 'V',
-		mainText: 'Please choose an additional optional message to send to the other player',
+		mainText: 'Please choose an additional message to send to the other player',
 		choices: [
-			['shared_knowledge', `If both players choose option A, both players get the
-			highest payoff. But option B is the better choice if the other
-			player plays option B`],
+			['shared_knowledge', `Option A is the better choice if both players
+				choose option A as both players get the highest payoff. Option
+				B is the better choice if the other player plays option B`],
 			['N', 'Do not send this part of the message']
 		],
 		requiredChoice: true
@@ -58,7 +58,7 @@
 		name: 'ChoiceTable',
 		id: 'communication_choices_prosocial',
 		orientation: 'V',
-		mainText: 'Please choose an additional optional message to send to the other player',
+		mainText: 'Please choose an additional message to send to the other player',
 		choices: [
 			['A_prosocial', 'I care about both of our payoffs'],
 			['B_prosocial', 'I care only about my own payoff'],
@@ -82,7 +82,7 @@ module.exports = {
      * used to initialize the game timer for the step.
      */
     TIMER: {
-        instructions: 60000
+        instructions: 120000
     },
 
     // # Game specific properties

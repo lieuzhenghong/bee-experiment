@@ -30,7 +30,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
 
-    stager.extendStep('communicate', {
+	stager.extendStep('communicate', {
         cb: function() {
             console.log('Communicate');
         }
@@ -89,7 +89,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     // Mark the item as manipulated.
                     msg.data.originalOffer = offer;
                 }
-
 
 				// And it also works here, so why doesn't it work in the 'send' step?
 				console.log(msg)
