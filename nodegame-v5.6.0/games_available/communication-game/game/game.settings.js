@@ -20,9 +20,9 @@
 		orientation: 'V',
 		mainText: "Please choose a message to send to the other player:",
 		choices: [
-			'I intend to choose A',
-			'I intend to choose B',
-			['', 'Do not send this part of the message']
+			'I intend to choose A. ',
+			'I intend to choose B. ',
+			'Do not send this part of the message'
 		],
 		requiredChoice: true
 	}
@@ -33,9 +33,9 @@
 		orientation: 'V',
 		mainText: 'Please choose an additional message to send to the other player',
 		choices: [
-			'You should choose A',
-			'You should choose B',
-			['', 'Do not send this part of the message']
+			'You should choose A. ',
+			'You should choose B. ',
+			'Do not send this part of the message'
 		],
 		requiredChoice: true
 	}
@@ -48,8 +48,8 @@
 		choices: [
 			'Option A is the better choice if both players ' +
 			'choose option A as both players get the highest payoff. ' +
-			'Option B is the better choice if the other player plays option B',
-			['', 'Do not send this part of the message']
+			'Option B is the better choice if the other player plays option B. ',
+			'Do not send this part of the message'
 		],
 		requiredChoice: true
 	}
@@ -60,9 +60,9 @@
 		orientation: 'V',
 		mainText: 'Please choose an additional message to send to the other player',
 		choices: [
-			'I care about both of our payoffs',
-			'I care only about my own payoff',
-			['', 'Do not send this part of the message']
+			'I care about both of our payoffs. ',
+			'I care only about my own payoff. ',
+			'Do not send this part of the message'
 		],
 		requiredChoice: true
 	}
@@ -84,6 +84,8 @@ module.exports = {
     TIMER: {
         instructions: 120000
     },
+
+	msg_received: "FUCK YOU'RE NOT SUPPOSED TO SEE THIS",
 
     // # Game specific properties
 

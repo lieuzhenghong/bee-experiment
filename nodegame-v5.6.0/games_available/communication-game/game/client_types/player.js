@@ -66,15 +66,46 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
 	});
 
+	stager.setDefaultProperty('msg', '');
+
 	stager.extendStep('receive', {
+		frame: 'receive.htm',
 		cb: function() {
 			node.on.data('message_received', function(msg) {
 				console.log("message received!");
 				console.log(msg);
+				// Modify local copy of global var
+				node.game.settings.msg_received = msg;
+				console.log(node.game.settings.msg_received);
+				const display_box = W.getElementById('message_display_box');
+				display_box.innerHTML = '<p>' + msg.data;
 			});
 		}
 	});
 
+	stager.extendStep('game', {
+		frame: 'stag.htm',
+		cb: function() {
+			const msg = node.game.settings.msg_received;
+			console.log(msg);
+			const display_box = W.getElementById('message_display_box');
+			display_box.innerHTML = '<p>' + msg.data;
+		},
+		widget: {
+			name: 'ChoiceTable',
+			root: 'choice_table_box',
+			options: {
+				id: 'stag_choice',
+				choices: ['Option A', 'Option B'],
+				requiredChoice: true
+			}
+		},
+		done: function(values) {
+			console.log(values)
+		}
+	});
+
+	/*
     stager.extendStep('game', {
         donebutton: false,
 		frame: 'game.htm',
@@ -142,6 +173,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             }
         }
     });
+	*/
 
     stager.extendStep('end', {
         donebutton: false,
