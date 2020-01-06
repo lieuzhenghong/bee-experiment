@@ -115,7 +115,7 @@ module.exports = {
 			orientation: 'V',
 			mainText: "What happens if one person plays B and the other plays A?",
 			choices: [
-				'The person who plays A gets $0.90, the person who plays A gets $0.90', 
+				'The person who plays A gets $0.90, the person who plays B gets $0.20', 
 				'The person who plays B gets $0.90, the person who plays A gets $0.20' 
 			],
 			correctChoice: 1

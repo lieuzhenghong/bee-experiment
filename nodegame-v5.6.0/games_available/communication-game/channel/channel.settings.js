@@ -44,6 +44,7 @@ module.exports = {
      * `node.connect('/gameName').
      */
     // alias: [],
+	alias: ['MTurk Game'],
 
     /**
      * ## playerServer (object|string) Optional
@@ -59,7 +60,8 @@ module.exports = {
      */
     playerServer: {
 
-        endpoint: 'communication-game',
+        //endpoint: 'communication-game',
+		endpoint: '',
 
 
         // Anti-spoofing, extra check to see if msg.from matches socket.id
@@ -186,7 +188,7 @@ module.exports = {
      *
      * Default: TRUE
      */
-    // sioQuery: false,
+    sioQuery: false,
 
     /**
      * ### defaultChannel (boolean) Optional
@@ -205,7 +207,7 @@ module.exports = {
      *
      * Default: false
      */
-    // defaultChannel: false,
+	// defaultChannel: true,
 
     /**
      * ### noAuthCookie (boolean) Optional
