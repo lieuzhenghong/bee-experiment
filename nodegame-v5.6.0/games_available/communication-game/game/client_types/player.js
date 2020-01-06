@@ -98,6 +98,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 				const display_box = W.getElementById('message_display_box');
 				display_box.innerHTML = '<p>' + msg.data;
 			});
+
+			// Automatically go to the game screen after 20 seconds
+			setTimeout(function() { node.done(); }, 20000);
 		}
 	});
 
