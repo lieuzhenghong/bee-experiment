@@ -13,10 +13,12 @@ module.exports = function(stager, settings) {
 
      stager
         .next('instructions')
+		.next('quiz')
         .next('communicate')
 		.step('send')
 		.step('receive')
 		.next('game')
+		.next('results')
         //.repeat('game', settings.REPEAT)
         .next('end')
         .gameover();

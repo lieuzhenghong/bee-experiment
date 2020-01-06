@@ -45,6 +45,20 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         frame: 'instructions.htm'
     });
 
+	stager.extendStep('quiz', {
+		widget: {
+			id: 'comprehension_quiz',
+			name: 'ChoiceManager',
+			root: 'container',
+			options: {
+				className: 'centered',
+				mainText: 'A small quiz to test your understanding',
+				forms: settings.quiz
+			}
+		}
+	});
+
+
 	stager.extendStep('send', {
 		widget: {
 			id: 'message_choice',
@@ -71,6 +85,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 	stager.extendStep('receive', {
 		frame: 'receive.htm',
 		cb: function() {
+			const container = W.getElementById('other_text');
+			container.innerHTML += '<h2>Message received</h2>';
+			container.innerHTML += "<p> Your partner's message to you is:";
+
 			node.on.data('message_received', function(msg) {
 				console.log("message received!");
 				console.log(msg);
@@ -92,88 +110,39 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 			display_box.innerHTML = '<p>' + msg.data;
 		},
 		widget: {
-			name: 'ChoiceTable',
+			name: 'ChoiceManager',
 			root: 'choice_table_box',
 			options: {
-				id: 'stag_choice',
-				choices: ['Option A', 'Option B'],
-				requiredChoice: true
+				className: 'centered',
+				forms: [{
+					name: 'ChoiceTable',
+					id: 'stag_choice',
+					orientation: 'V',
+					mainText: "Choose an option to play:",
+					choices: [['A', 'Option A'], ['B', 'Option B']],
+					requiredChoice: true
+				}]
 			}
 		},
 		done: function(values) {
-			console.log(values)
+			console.log(values.forms)
+			node.say('choice_made', 'SERVER', {game_choice: values.forms });
 		}
 	});
 
-	/*
-    stager.extendStep('game', {
-        donebutton: false,
-		frame: 'game.htm',
-        roles: {
-            DICTATOR: {
-                timer: settings.bidTime,
-                cb: function() {
-                    var button, offer;
-
-                    // Make the dictator display visible.
-                    W.getElementById('dictator').style.display = '';
-                    // W.gid = W.getElementById.
-                    button = W.gid('submitOffer');
-                    offer =  W.gid('offer');
-
-                    // Listen on click event.
-                    button.onclick = function() {
-                        var decision;
-
-                        // Validate offer.
-                        decision = node.game.isValidBid(offer.value);
-                        if ('number' !== typeof decision) {
-                            W.writeln('Please enter a number between ' +
-                                      '0 and 100.', 'dictator');
-                            return;
-                        }
-                        button.disabled = true;
-
-                        // Mark the end of the round, and
-                        // store the decision in the server.
-                        node.done({ offer: decision });
-                    };
-                },
-                timeup: function() {
-                    var n;
-                    // Generate random value.
-                    n = J.randomInt(-1,100);
-                    // Set value in the input box.
-                    W.gid('offer').value = n;
-                    // Click the submit button to trigger the event listener.
-                    W.gid('submitOffer').click();
-                }
-            },
-            OBSERVER: {
-                cb: function() {
-                    var span, div, dotsObj;
-
-                    // Make the observer display visible.
-                    div = W.getElementById('observer').style.display = '';
-                    span = W.getElementById('dots');
-                    dotsObj = W.addLoadingDots(span);
-
-                    node.on.data('decision', function(msg) {
-                        dotsObj.stop();
-                        W.setInnerHTML('waitingFor', 'Decision arrived: ');
-                        W.setInnerHTML('decision',
-                                       'The dictator offered: ' +
-                                       msg.data + ' ECU.');
-
-                        setTimeout(function() {
-                            node.done();
-                        }, 5000);
-                    });
-                }
-            }
-        }
-    });
-	*/
+	stager.extendStep('results', {
+		frame: 'receive.htm',
+		cb: function() {
+			node.on.data('results_received', function(msg) {
+				const container = W.getElementById('other_text');
+				container.innerHTML += '<h2>Results</h2>'
+				const display_box = W.getElementById('message_display_box');
+				display_box.innerHTML = '<p>' + msg.data;
+			})
+			// Automatically go to the results screen after 20 seconds
+			setTimeout(function() { node.done(); }, 20000);
+		}
+	});
 
     stager.extendStep('end', {
         donebutton: false,

@@ -90,51 +90,87 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
-	stager.extendStep('game', {
+	var staged_choices = {};	
 
+	stager.extendStep('game', {
+		cb: function () {
+			node.on.data('choice_made', function(msg) {
+				console.log("choice received!");
+				console.log(msg)
+				console.log(msg.data.game_choice.stag_choice)
+				let player_id = msg.from;
+				let other_player = node.game.matcher.getMatchFor(msg.from);
+				let game_choice = msg.data.game_choice.stag_choice.choice;
+
+				console.log(`The player is: ${player_id}`);
+				console.log(`The other player is: ${other_player}`);
+				console.log(`This player chose: ${game_choice}`);
+
+				// [TODO] check if this assert actually works
+				console.assert(!staged_choices[player_id])
+				staged_choices[player_id] = {};
+				staged_choices[player_id].other_player = other_player;
+				staged_choices[player_id].game_choice = game_choice;
+			});
+		}
 	});
 
-	/*
-    stager.extendStep('game', {
-        matcher: {
-            roles: [ 'DICTATOR', 'OBSERVER' ],
-            match: 'round_robin',
-            cycle: 'mirror_invert',
-            // sayPartner: false
-            // skipBye: false,
+	stager.extendStep('results', {
+		cb: function () {
+			console.log(staged_choices);
+			const playerIds = Object.keys(staged_choices);
+			console.log('Now displaying playerIds: ' + playerIds);
+			console.log(playerIds);
+			const p1Id = playerIds[0];
+			const p2Id = playerIds[1];
 
-        },
-        cb: function() {
-            node.once.data('done', function(msg) {
-                var offer, observer;
-                offer = msg.data.offer;
+			// [TODO] check if assert actually works
+			console.assert(staged_choices[p1Id].other_player === p2Id);
+			console.assert(staged_choices[p2Id].other_player === p1Id);
 
-                // Validate incoming offer.
-                if (false === J.isInt(offer, 0, 100)) {
-                    console.log('Invalid offer received from ' + msg.from);
-                    // If dictator is cheating re-set his/her offer.
-                    msg.data.offer = settings.defaultOffer;
-                    // Mark the item as manipulated.
-                    msg.data.originalOffer = offer;
-                }
+			// Check what the other player played and update the payoffs
 
-				// And it also works here, so why doesn't it work in the 'send' step?
-				console.log(msg)
-				console.log(msg.from);
-                observer = node.game.matcher.getMatchFor(msg.from);
-				console.log(`The other player is: ${observer}`);
-                // Send the decision to the other player.
-                node.say('decision', observer, msg.data.offer);
+			const p1Choice = staged_choices[p1Id].game_choice;
+			const p2Choice = staged_choices[p2Id].game_choice;
 
-            });
-            console.log('Game round: ' + node.player.stage.round);
-        }
-    });
-	*/
+			if (p1Choice === 'A' && p2Choice === 'A') {
+				staged_choices[p1Id].payoff = settings.BOTH_STAG;
+				staged_choices[p2Id].payoff = settings.BOTH_STAG;
+			}
+			else if (p1Choice === 'A' && p2Choice === 'B') {
+				staged_choices[p1Id].payoff = settings.GOT_FUCKED;
+				staged_choices[p2Id].payoff = settings.FUCKED_THE_OTHER_GUY;
+			}
+			else if (p1Choice === 'B' && p2Choice === 'A') {
+				staged_choices[p1Id].payoff = settings.FUCKED_THE_OTHER_GUY;
+				staged_choices[p2Id].payoff = settings.GOT_FUCKED;
+			}
+			else {
+				staged_choices[p1Id].payoff = settings.BOTH_HARE;
+				staged_choices[p2Id].payoff = settings.BOTH_HARE;
+			}
+			console.log(staged_choices);
+
+			// Send the appropriate acknowledgement messages to the players
+			sendtoClient(p1Id, p1Choice, p2Choice, staged_choices[p1Id].payoff,
+				staged_choices[p2Id].payoff)
+			sendtoClient(p2Id, p2Choice, p1Choice, staged_choices[p2Id].payoff,
+				staged_choices[p1Id].payoff)
+		}
+	});
+
+	function sendtoClient(sId, sChoice, oChoice, sPayoff, oPayoff) {
+		const message_string = `You played ${sChoice}. Your partner played ${oChoice}. ` +
+			`You got $ ${sPayoff.toFixed(2)}. ` +
+			`Your partner got $ ${oPayoff.toFixed(2)}.`
+		node.say('results_received', sId, message_string);
+	}
 
     stager.extendStep('end', {
         cb: function() {
+
             // Save data in the data/roomXXX directory.
+			// TODO check if this works?? Where does it save to and what does it save?
             node.game.memory.save('data.json');
         }
     });
