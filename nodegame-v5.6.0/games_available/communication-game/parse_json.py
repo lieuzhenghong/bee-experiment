@@ -24,9 +24,10 @@ def parse_data_dump(filename):
 
         print(parsed)
 
+        with open(filename.split('.json')[0] + '_parsed.json', 'w', encoding='utf-8') as f:
+            json.dump(parsed, f, ensure_ascii=False, indent=4)
+
 def strip_msg_form(forms):
-    acc = [int(v['choice']) for k,v in forms.items()]
-    return acc
-        
+    return [int(v['choice']) for k,v in forms.items()]
 
 parse_data_dump('./data/room000122data.json')
