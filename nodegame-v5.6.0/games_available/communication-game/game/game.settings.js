@@ -85,9 +85,9 @@ module.exports = {
      */
     TIMER: {
         instructions: 120000,
-		quiz: 180000,
+		quiz: 120000,
 		send: 120000,
-		receive: 30000,
+		receive: 20000,
 		game: 180000,
 		results: 20000
     },
@@ -95,15 +95,6 @@ module.exports = {
 	msg_received: "FUCK YOU'RE NOT SUPPOSED TO SEE THIS",
 
     // # Game specific properties
-
-    // Number of game rounds repetitions.
-    REPEAT: 4,
-
-    // In case an incoming offer does not pass validation, which indicates
-    // cheating, re-set the dictator's offer to this value.
-    defaultOffer: 100,
-
-	bidTime: 30000,
 
 	quiz : [
 		{
@@ -118,7 +109,6 @@ module.exports = {
 			],
 			correctChoice: 0
 		}
-		/*
 		{
 			name: 'ChoiceTable',
 			id: 'quiz_2',
@@ -154,7 +144,6 @@ module.exports = {
 			],
 			correctChoice: 0
 		}
-		*/
 	],
 
 	BOTH_STAG : 1,
