@@ -108,7 +108,7 @@ module.exports = {
 				'Only your partner gets to send a message to you'
 			],
 			correctChoice: 0
-		}
+		},
 		{
 			name: 'ChoiceTable',
 			id: 'quiz_2',
@@ -119,7 +119,7 @@ module.exports = {
 				'The person who plays B gets $0.90, the person who plays A gets $0.20' 
 			],
 			correctChoice: 1
-		}
+		},
 		{
 			name: 'ChoiceTable',
 			id: 'quiz_3',
@@ -127,11 +127,11 @@ module.exports = {
 			mainText: "What do you get if both players play A?",
 			choices: [
 				'Both players get $0.50', 
-				'Both players get $0.90' 
-				'Both players get $1.00',
+				'Both players get $0.90',
+				'Both players get $1.00'
 			],
 			correctChoice: 2
-		}
+		},
 		{
 			name: 'ChoiceTable',
 			id: 'quiz_4',
@@ -139,8 +139,8 @@ module.exports = {
 			mainText: "What do you get if both players play B?",
 			choices: [
 				'Both players get $0.50', 
-				'Both players get $0.90' 
-				'Both players get $1.00',
+				'Both players get $0.90', 
+				'Both players get $1.00'
 			],
 			correctChoice: 0
 		}
