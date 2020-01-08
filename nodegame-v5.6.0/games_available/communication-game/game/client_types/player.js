@@ -149,7 +149,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             root: "body",
             options: {
                 panel: false,
-                title: false
+                title: false,
+				showEmailForm: false
             }
         },
         cb: function() {

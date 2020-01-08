@@ -29,6 +29,23 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
+	stager.extendStep('quiz', {
+		timer: 30000,
+
+        cb: function() {
+			setTimeout(function () {
+				console.log("setTimeout function called")
+				node.game.pl.each(function(p) {
+				   if (p.stageLevels !==  node.constants.stageLevels.DONE) {
+					   node.disconnectClient(p);
+					   // Notice that the disconnection will trigger the disconnection handler.
+				   }
+				});
+			}, 20000)
+        }
+
+    });
+
 
 	stager.extendStep('communicate', {
         cb: function() {
