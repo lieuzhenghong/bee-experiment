@@ -21,7 +21,7 @@ module.exports = function(stager, settings) {
 		.next('results')
         //.repeat('game', settings.REPEAT)
         .next('end')
-        .gameover();
+        //.gameover();
 
     // Modify the stager to skip one stage.
     // stager.skip('instructions');

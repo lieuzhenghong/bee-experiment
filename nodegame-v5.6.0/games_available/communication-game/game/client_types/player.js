@@ -21,11 +21,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         var header, frame;
 
-        // Bid is valid if it is a number between 0 and 100.
-        this.isValidBid = function(n) {
-            return node.JSUS.isInt(n, -1, 101);
-        };
-
         // Setup page: header + frame.
         header = W.generateHeader();
         frame = W.generateFrame();
@@ -52,7 +47,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 			root: 'container',
 			options: {
 				className: 'centered',
-				mainText: 'A small quiz to test your understanding',
+				mainText: 'Please answer this small quiz to test your understanding:',
 				forms: settings.quiz
 			}
 		}
@@ -66,7 +61,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 			root: 'container',
 			options: {
 				className: 'centered',
-				mainText: 'A small quiz',
+				mainText: 'You may now choose what message to send to your partner from the options below. Your partner will also choose from the same options to send a message to you:',
 				forms: settings.forms
 			}
 		},
@@ -83,6 +78,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 	stager.setDefaultProperty('msg', '');
 
 	stager.extendStep('receive', {
+		pushClients: true,
 		frame: 'receive.htm',
 		cb: function() {
 			const container = W.getElementById('other_text');
@@ -134,6 +130,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 	});
 
 	stager.extendStep('results', {
+		pushClients: true,
 		frame: 'receive.htm',
 		cb: function() {
 			node.on.data('results_received', function(msg) {
@@ -142,14 +139,19 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 				const display_box = W.getElementById('message_display_box');
 				display_box.innerHTML = '<p>' + msg.data;
 			})
-			// Automatically go to the results screen after 20 seconds
-			setTimeout(function() { node.done(); }, 20000);
 		}
 	});
 
     stager.extendStep('end', {
         donebutton: false,
-        frame: 'end.htm',
+        widget: {
+            name: 'EndScreen',
+            root: "body",
+            options: {
+                panel: false,
+                title: false
+            }
+        },
         cb: function() {
             node.game.visualTimer.setToZero();
         }

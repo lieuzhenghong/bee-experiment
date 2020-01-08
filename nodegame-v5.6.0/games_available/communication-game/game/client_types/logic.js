@@ -87,6 +87,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 				console.log('Message string: ' + message_string);
 				node.say('message_received', msg_obj.other_player, message_string);
 			})
+
+			// Handle reconnection in the receive message step
+			node.on.data('reconnect_msg', function() {
+				// Find the message that needs to be resent back to player
+
+			})
         }
     });
 
@@ -151,6 +157,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 			}
 			console.log(staged_choices);
 
+			// Update the channel registry for use in EndScreen 
+			const p1Client = channel.registry.getClient(p1Id);
+			const p2Client = channel.registry.getClient(p2Id);
+			p1Client.win = staged_choices[p1Id].payoff;
+			p2Client.win = staged_choices[p2Id].payoff;
+
 			// Send the appropriate acknowledgement messages to the players
 			sendtoClient(p1Id, p1Choice, p2Choice, staged_choices[p1Id].payoff,
 				staged_choices[p2Id].payoff)
@@ -169,11 +181,63 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStep('end', {
         cb: function() {
 
-            // Save data in the data/roomXXX directory.
-			// TODO check if this works?? Where does it save to and what does it save?
+			gameRoom.computeBonus({
+                header: [ 'id', 'type', 'workerid', 'hitid',
+                          'assignmentid', 'exit', 'bonus' ],
+                headerKeys: [ 'id', 'clientType', 'WorkerId',
+                              'HITId', 'AssignmentId', 'ExitCode', 'win' ],
+                say: true,   // default false
+                dump: true,  // default false
+                print: true  // default false                
+            });
+
+
+		   	node.on.data('email', function(msg) {
+				var id, code;
+				id = msg.from;
+
+				code = channel.registry.getClient(id);
+				if (!code) {
+					console.log('ERROR: no code in endgame:', id);
+					return;
+				}
+
+				// Write email.
+				appendToCSVFile(msg.data, code, 'email');
+			});
+
+			node.on.data('feedback', function(msg) {
+				var id, code;
+				id = msg.from;
+
+				code = channel.registry.getClient(id);
+				if (!code) {
+					console.log('ERROR: no code in endgame:', id);
+					return;
+				}
+
+				// Write email.
+				appendToCSVFile(msg.data, code, 'feedback');
+			});
+
             node.game.memory.save('data.json');
+
         }
     });
+
+    function appendToCSVFile(email, code, fileName) {
+        var row;
+
+        row  = '"' + (code.id || code.AccessCode || 'NA') + '", "' +
+            (code.workerId || 'NA') + '", "' + email + '"\n';
+
+        fs.appendFile(gameRoom.dataDir + fileName + '.csv', row, function(err) {
+            if (err) {
+                console.log(err);
+                console.log(row);
+            }
+        });
+    }
 
     stager.setOnGameOver(function() {
         // Something to do.

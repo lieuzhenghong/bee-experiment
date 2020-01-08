@@ -84,11 +84,11 @@ module.exports = {
      * used to initialize the game timer for the step.
      */
     TIMER: {
-        instructions: 120000,
-		quiz: 120000,
+        instructions: 10000,
+		quiz: 15000,
 		send: 120000,
 		receive: 20000,
-		game: 180000,
+		game: 120000,
 		results: 20000
     },
 
